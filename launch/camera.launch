@@ -6,7 +6,7 @@
   	<!-- set camera fps to -->
   	<arg name="set_camera_fps" default="30" />
   	<!-- set buffer queue size of frame capturing to -->
-  	<arg name="buffer_queue_size" default="100" />
+  	<arg name="buffer_queue_size" default="1" />
   	<!-- frames per second to query the camera for -->
   	<arg name="fps" default="30" />
   	<!-- frame_id for the camera -->
@@ -14,7 +14,8 @@
   	<!-- By default, calibrations are stored to file://${ROS_HOME}/camera_info/${NAME}.yaml
   	To use your own fill this arg with the corresponding url, e.g.:
   	"file:///$(find your_camera_package)/config/your_camera.yaml" -->
-    <arg name="camera_info_url" default="" />
+    <arg name="camera_info_url" default="file://$(find video_stream_opencv)/config/calibration_camera4.yaml" />
+    <!-- <arg name="camera_info_url" default="" /> -->
   	<!-- flip the image horizontally (mirror it) -->
   	<arg name="flip_horizontal" default="false" />
   	<!-- flip the image vertically -->
@@ -30,10 +31,10 @@
 	<arg name="visualize" default="false"/>
 
 
-   
+
    	<!-- images will be published at /camera_name/image with the image transports plugins (e.g.: compressed) installed -->
    	<group ns="$(arg camera_name)">
-	    <node pkg="video_stream_opencv" type="video_stream" name="$(arg camera_name)_stream" output="screen"> 
+		<node pkg="video_stream_opencv" type="video_stream" name="$(arg camera_name)_stream" output="screen">
 	    	<remap from="camera" to="image_raw" />
 	    	<param name="camera_name" type="string" value="$(arg camera_name)" />
 	        <param name="video_stream_provider" type="string" value="$(arg video_stream_provider)" />
@@ -55,5 +56,7 @@
 	    	<remap from="image" to="image_raw" />
 	    </node>
 	</group>
+
+	<node pkg="video_stream_opencv" type="remap_camera_info.py" name="remap_camera_info" output="screen" />
 
 </launch>

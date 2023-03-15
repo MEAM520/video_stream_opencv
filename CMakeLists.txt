@@ -39,6 +39,7 @@ install(TARGETS video_stream_node ${PROJECT_NAME}
 
 install(PROGRAMS
   scripts/test_video_resource.py
+  scripts/remap_camera_info.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 install(DIRECTORY launch test

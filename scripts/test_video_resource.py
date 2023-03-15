@@ -1,4 +1,4 @@
-#! /usr/bin/env python2
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 
@@ -13,9 +13,9 @@ test_video_resource.py contains
 a testing code to see if opencv can open a video stream
 useful to debug if video_stream does not work
 """
-
 import cv2
 import sys
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
